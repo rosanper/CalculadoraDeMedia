@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -8,12 +9,9 @@ public class Main {
         double[] numerosRecebidos;
         int quantidadeNumeros;
         double media = 0;
-
-        // Leitura da quantidade de números
+        
         System.out.println("Seja bem vindo a calculadora de médias!!");
-        System.out.println("Informe a quantidade de números que serão digitados:");
-        quantidadeNumeros = scan.nextInt();
-        scan.nextLine();
+        quantidadeNumeros = pegarQuantidadeNumeros(scan);
 
         // Leitura dos números
         numerosRecebidos = lerNumeros(scan,quantidadeNumeros);
@@ -46,6 +44,25 @@ public class Main {
 
 
 
+    }
+
+    public static int pegarQuantidadeNumeros(Scanner scanner){
+        System.out.println("Informe a quantidade de números que serão digitados:");
+        int quantidadeNumeros = 0;
+        try {
+            quantidadeNumeros = scanner.nextInt();
+            scanner.nextLine();
+            if (quantidadeNumeros <= 0){
+                System.out.println("O número digitado deve ser maior que 0");
+                pegarQuantidadeNumeros(scanner);
+            }
+        } catch (InputMismatchException e){
+            System.out.println("Você digitou uma entrada inválida");
+            scanner.nextLine();
+            pegarQuantidadeNumeros(scanner);
+        }
+
+        return quantidadeNumeros;
     }
 
     public static double[] lerNumeros(Scanner scanner, int quantidade){
