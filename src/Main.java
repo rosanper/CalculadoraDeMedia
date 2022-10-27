@@ -9,12 +9,11 @@ public class Main {
         double[] numerosRecebidos;
         int quantidadeNumeros;
         double media = 0;
-        
+
         System.out.println("Seja bem vindo a calculadora de médias!!");
         quantidadeNumeros = pegarQuantidadeNumeros(scan);
 
-        // Leitura dos números
-        numerosRecebidos = lerNumeros(scan,quantidadeNumeros);
+        numerosRecebidos = pegarNumerosRecebidos(scan,quantidadeNumeros);
 
         // Escolha do tipo de média que será calculada
         boolean opcaoValida = false;
@@ -65,12 +64,25 @@ public class Main {
         return quantidadeNumeros;
     }
 
-    public static double[] lerNumeros(Scanner scanner, int quantidade){
+    public static double lerNumero(Scanner scanner){
+        double numero = 0;
+        System.out.println("Digite um número: ");
+        try {
+            numero = scanner.nextDouble();
+            scanner.nextLine();
+            return numero;
+        } catch (InputMismatchException e){
+            System.out.println("Você digitou uma entrada inválida");
+            scanner.nextLine();
+            return lerNumero(scanner);
+        }
+
+    }
+
+    public static double[] pegarNumerosRecebidos(Scanner scanner, int quantidade){
         double[] numeros = new double[quantidade];
         for (int i = 0; i < numeros.length; i++) {
-            System.out.println("Digite um número: ");
-            numeros[i] = scanner.nextDouble();
-            scanner.nextLine();
+            numeros[i] = lerNumero(scanner);
         }
         return numeros;
     }
