@@ -8,7 +8,7 @@ public class Main {
 
         double[] numerosRecebidos;
         int quantidadeNumeros;
-        double media = 0;
+        double media;
         String opcaoEscolhida;
 
         System.out.println("Seja bem vindo a calculadora de médias!!");
@@ -18,11 +18,7 @@ public class Main {
 
         opcaoEscolhida = escolherMedia(scan);
 
-        if (opcaoEscolhida.equalsIgnoreCase("ARITMETICA")){
-                media = calcularMediaAritmetica(numerosRecebidos);
-        } else if (opcaoEscolhida.equalsIgnoreCase("HARMONICA")) {
-                media = calcularMediaHarmonica(numerosRecebidos);
-        }
+        media = calcularMedia(numerosRecebidos,opcaoEscolhida);
 
         System.out.println("Os números digitados foram:");
         for (double numero : numerosRecebidos) {
@@ -89,6 +85,16 @@ public class Main {
             }
         } while (opcaoValida == false);
         return opcaoEscolhida.toUpperCase();
+    }
+
+    public static double calcularMedia(double[] numeros, String escolha){
+        double media = 0;
+        if (escolha.equalsIgnoreCase("ARITMETICA")){
+            media = calcularMediaAritmetica(numeros);
+        } else if (escolha.equalsIgnoreCase("HARMONICA")) {
+            media = calcularMediaHarmonica(numeros);
+        }
+        return media;
     }
     public static double calcularMediaAritmetica(double[] numeros){
         double mediaAritmetica;
