@@ -55,13 +55,12 @@ public class Main {
                 System.out.println("O número digitado deve ser maior que 0");
                 pegarQuantidadeNumeros(scanner);
             }
+            return quantidadeNumeros;
         } catch (InputMismatchException e){
             System.out.println("Você digitou uma entrada inválida");
             scanner.nextLine();
-            pegarQuantidadeNumeros(scanner);
+            return pegarQuantidadeNumeros(scanner);
         }
-
-        return quantidadeNumeros;
     }
 
     public static double lerNumero(Scanner scanner){
