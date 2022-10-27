@@ -9,40 +9,27 @@ public class Main {
         double[] numerosRecebidos;
         int quantidadeNumeros;
         double media = 0;
+        String opcaoEscolhida;
 
         System.out.println("Seja bem vindo a calculadora de médias!!");
         quantidadeNumeros = pegarQuantidadeNumeros(scan);
 
         numerosRecebidos = pegarNumerosRecebidos(scan,quantidadeNumeros);
 
-        // Escolha do tipo de média que será calculada
-        boolean opcaoValida = false;
-        String opcaoEscolhida;
-        do {
-            System.out.println("Digite o tipo de média que você quer fazer: ARITMETICA ou HARMONICA");
-            opcaoEscolhida = scan.nextLine();
-            if (opcaoEscolhida.equalsIgnoreCase("ARITMETICA")){
-                media = calcularMediaAritmetica(numerosRecebidos);
-                opcaoValida = true;
-            } else if (opcaoEscolhida.equalsIgnoreCase("HARMONICA")) {
-                media = calcularMediaHarmonica(numerosRecebidos);
-                opcaoValida = true;
-            }else {
-                System.out.println("Voce digitou uma opção inválida.");
-            }
-        } while (opcaoValida == false);
+        opcaoEscolhida = escolherMedia(scan);
 
-        // Calculo da média
-        // Imprimir resultado
+        if (opcaoEscolhida.equalsIgnoreCase("ARITMETICA")){
+                media = calcularMediaAritmetica(numerosRecebidos);
+        } else if (opcaoEscolhida.equalsIgnoreCase("HARMONICA")) {
+                media = calcularMediaHarmonica(numerosRecebidos);
+        }
+
         System.out.println("Os números digitados foram:");
         for (double numero : numerosRecebidos) {
             System.out.println(numero);
         }
-        System.out.println("A média que deseja ser calculada é a média: " + opcaoEscolhida.toUpperCase());
+        System.out.println("A média que deseja ser calculada é a média: " + opcaoEscolhida);
         System.out.println("A média " + opcaoEscolhida.toUpperCase() + " é " + media);
-
-
-
     }
 
     public static int pegarQuantidadeNumeros(Scanner scanner){
@@ -86,6 +73,23 @@ public class Main {
         return numeros;
     }
 
+    public static String escolherMedia(Scanner scanner){
+        String opcaoEscolhida;
+        boolean opcaoValida = false;
+
+        do {
+            System.out.println("Digite o tipo de média que você quer fazer: ARITMETICA ou HARMONICA");
+            opcaoEscolhida = scanner.nextLine();
+            if (opcaoEscolhida.equalsIgnoreCase("ARITMETICA")){
+                opcaoValida = true;
+            } else if (opcaoEscolhida.equalsIgnoreCase("HARMONICA")) {
+                opcaoValida = true;
+            }else {
+                System.out.println("Voce digitou uma opção inválida.");
+            }
+        } while (opcaoValida == false);
+        return opcaoEscolhida.toUpperCase();
+    }
     public static double calcularMediaAritmetica(double[] numeros){
         double mediaAritmetica;
         double soma = 0;
